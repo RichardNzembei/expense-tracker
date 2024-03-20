@@ -1,21 +1,33 @@
-document.getElementById('addExpenseBtn').addEventListener('click', addExpense);
+const expenses = []; // Array to store expense objects
 
-function addExpense() {
-    const expenseInput = document.getElementById('expenseInput').value;
-    const amountInput = document.getElementById('amountInput').value;
-    const categoryInput = document.getElementById('categoryInput').value;
+const expenseInput = document.getElementById('expenseInput');
+const amountInput = document.getElementById('amountInput');
+const categoryInput = document.getElementById('categoryInput');
+const expensesList = document.getElementById('expensesList');
+const addExpenseBtn = document.getElementById('addExpenseBtn');
 
-    if (expenseInput.trim() === '' || amountInput.trim() === '') {
-        alert('Please enter both expense and amount.');
-        return;
-    }
+addExpenseBtn.addEventListener('click', function() {
+  const description = expenseInput.value.trim(); // Trim whitespaces
+  const amount = parseFloat(amountInput.value);
+  const category = categoryInput.value;
 
-    const expensesList = document.getElementById('expensesList');
-    const expenseItem = document.createElement('div');
-    expenseItem.textContent = `Expense: ${expenseInput}, Amount: ${amountInput}, Category: ${categoryInput}`;
-    expensesList.appendChild(expenseItem);
+  if (!description || isNaN(amount)) {
+    alert('Please enter a valid expense description and amount.');
+    return;
+  }
 
-    // Clear input fields after adding expense
-    document.getElementById('expenseInput').value = '';
-    document.getElementById('amountInput').value = '';
-}
+  const expense = { description, amount, category };
+  expenses.push(expense);
+
+  // Update displayed expenses (example using a simple loop and creating list items)
+  expensesList.innerHTML = ''; // Clear existing list items
+  for (const expense of expenses) {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${expense.description} - ${expense.amount} (${expense.category})`;
+    expensesList.appendChild(listItem);
+  }
+
+  // Clear input fields
+  expenseInput.value = '';
+  amountInput.value = '';
+});

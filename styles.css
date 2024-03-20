@@ -30,3 +30,23 @@ button:hover {
     margin-top: 20px;
     text-align: left;
 }
+
+.profile-image {
+    width: 100px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    border-radius: 50%; /* Make image circular */
+    object-fit: cover; /* Ensure image fills the container */
+}
+
+.profile-image.hidden {
+    display: none; /* Initially hide additional profile images */
+}
+
+#motivation {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px; /* Add space after profile section */
+    color: #4CAF50; /* Green color for first word */
+    /* Add colors for other words using span elements within the p tag */
+    /* Example: <p id="motivation">Let's make your <span style="color: #ff9800;">transactions</span> easy and traceable!</p> */
+}
