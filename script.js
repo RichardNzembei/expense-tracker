@@ -1,33 +1,95 @@
-const expenses = []; // Array to store expense objects
+document.addEventListener('DOMContentLoaded', function() {
+  const expenses = [];
 
-const expenseInput = document.getElementById('expenseInput');
-const amountInput = document.getElementById('amountInput');
-const categoryInput = document.getElementById('categoryInput');
-const expensesList = document.getElementById('expensesList');
-const addExpenseBtn = document.getElementById('addExpenseBtn');
+  // Function to add expense to the list
+  function addExpense(description, amount, category) {
+      if (!description || isNaN(amount) || amount <= 0 || !category) {
+          alert('Please enter a valid expense description, amount, and category.');
+          return;
+      }
 
-addExpenseBtn.addEventListener('click', function() {
-  const description = expenseInput.value.trim(); // Trim whitespaces
-  const amount = parseFloat(amountInput.value);
-  const category = categoryInput.value;
-
-  if (!description || isNaN(amount)) {
-    alert('Please enter a valid expense description and amount.');
-    return;
+      const expense = { description, amount, category };
+      expenses.push(expense);
+      updateExpensesList();
+      updateExpensesTab();
   }
 
-  const expense = { description, amount, category };
-  expenses.push(expense);
+  // Function to update the displayed expenses list
+  function updateExpensesList() {
+      const expensesList = document.getElementById('expensesList');
+      if (!expensesList) {
+          console.error('Expenses list element not found.');
+          return;
+      }
 
-  // Update displayed expenses (example using a simple loop and creating list items)
-  expensesList.innerHTML = ''; // Clear existing list items
-  for (const expense of expenses) {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${expense.description} - ${expense.amount} (${expense.category})`;
-    expensesList.appendChild(listItem);
+      expensesList.innerHTML = ''; // Clear existing list items
+      for (const expense of expenses) {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${expense.description} - ${expense.amount} (${expense.category})`;
+          expensesList.appendChild(listItem);
+      }
   }
 
-  // Clear input fields
-  expenseInput.value = '';
-  amountInput.value = '';
+  // Function to update the expenses tab content
+  function updateExpensesTab() {
+      const expensesTabContent = document.getElementById('expenses-tab-content');
+      if (!expensesTabContent) {
+          console.error('Expenses tab content element not found.');
+          return;
+      }
+
+      expensesTabContent.innerHTML = ''; // Clear existing content
+
+      const expensesListTab = document.createElement('ul');
+      for (const expense of expenses) {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${expense.description} - ${expense.amount} (${expense.category})`;
+          expensesListTab.appendChild(listItem);
+      }
+
+      expensesTabContent.appendChild(expensesListTab);
+  }
+
+  // Event listener for the Add Expense button
+  const addExpenseBtn = document.getElementById('addExpenseBtn');
+  if (addExpenseBtn) {
+      addExpenseBtn.addEventListener('click', function() {
+          const description = document.getElementById('expenseInput').value.trim();
+          const amount = parseFloat(document.getElementById('amountInput').value);
+          const category = document.getElementById('categoryInput').value;
+
+          addExpense(description, amount, category);
+
+          document.getElementById('expenseInput').value = '';
+          document.getElementById('amountInput').value = '';
+      });
+  } else {
+      console.error('Add Expense button element not found.');
+  }
 });
+
+function toggleDropdown() {
+  var dropdown = document.getElementById("myDropdown");
+  dropdown.classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const typed = new Typed('.multiples', {
+      strings: ['Expense Tracker', 'Money Manager', 'Financial Planner'],
+      typeSpeed: 100,
+      loop: true,
+      showCursor: false
+  });
+});
+
