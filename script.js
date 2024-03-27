@@ -93,3 +93,34 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+
+function addExpense(description, amount, category) {
+  // Your existing code for adding expense to the list
+  // ...
+
+  // Send POST request to server to add expense to database
+  fetch('/addExpense', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          description: description,
+          amount: amount,
+          category: category
+      })
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Failed to add expense.');
+      }
+      return response.json();
+  })
+  .then(data => {
+      console.log('Expense added successfully:', data);
+      // Optionally, you can update the UI to reflect the newly added expense
+  })
+  .catch(error => {
+      console.error('Error adding expense:', error);
+  });
+}
