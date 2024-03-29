@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+<<<<<<< HEAD:public/home.html
     <link rel="stylesheet" href="styles.css" type="text/css">
 
   
+=======
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"></script>
+   
+>>>>>>> 7e63510 (updates):pages/home.html
     <style>
         .container {
             max-width: 800px;
@@ -16,11 +23,9 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        h1, h4{
+        h1, h4 {
             color: #333;
         }
-
         p {
             color: #666;
         }
@@ -28,33 +33,38 @@
 </head>
 <body>
     <div class="navbar">
+        <button class="profileButton"></button> Profile </button>
         <div class="dropdown">
-            <button class="dropbtn">Menu</button>
+            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
             <div class="dropdown-content">
                 <a href="home.html">Home</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="targets.html">Targets</a>
-                <a href="savings.html">Savings</a>
+                <a href="Expenses.html">Expenses</a>
+                <a href="Targets.html">Targets</a>
+                <a href="Savings.html">Savings</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h4> welcome to the semless money  <span class="multiples"></span></h4>
-              <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
-        <p>This is the home page of our expense tracker application.</p>
-
-        <h2>Expense Tracker</h2>
+        <h4>Welcome to the seamless money <span class="multiples"></span></h4>
+        <p>Hello friend, track records with me 😊</p>
+        
         <div class="multiple">
+<<<<<<< HEAD:public/home.html
             
             <img src="images/money1.png" alt="Profile Image 1" class="profile-image">
             <img src="images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
+=======
+            <img src="../assets/images/money1.png" alt="Profile Image 1" class="profile-image">
+            <img src="../assets/images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
+>>>>>>> 7e63510 (updates):pages/home.html
         </div>
-        <p id="motivation">Let's make your transactions easy eand traceable!</p>
+        <p id="motivation">Let's make your transactions easy and traceable!</p>
 
         <input type="text" id="expenseInput" placeholder="Enter expense">
         <input type="text" id="amountInput" placeholder="Enter amount">
+        <input type="date" id="dateInput"><br>
+
         <select id="categoryInput">
             <option value="Food">Food</option>
             <option value="Transportation">Transportation</option>
@@ -66,7 +76,15 @@
         <div id="expensesList"></div>
     </div>
 
+<<<<<<< HEAD:public/home.html
     <script src="script.js"></script> ```
+=======
+   
+ 
+    
+    <script type="module" src="../assets/scripts/script.js"></script>
+      
+>>>>>>> 7e63510 (updates):pages/home.html
 
 </body>
 </html>

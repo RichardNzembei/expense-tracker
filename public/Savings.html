@@ -4,25 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savings</title>
+<<<<<<< HEAD:public/Savings.html
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script> ```
+=======
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+    <script src="../assets/scripts/script.js"></script>
+    <style>
+        /* CSS styles for the Savings tab */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+>>>>>>> 7e63510 (updates):pages/Savings.html
 
+        h1, h4 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        /* Style for savings form */
+        #savingsForm {
+            margin-top: 20px;
+        }
+
+        #savingsForm input[type="text"],
+        #savingsForm input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #savingsForm button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #savingsForm select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
-        
+        <button class="profileButton"></button> Profile </button>
         <div class="dropdown">
-          <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="home.html">Home</a>
-            <a href="Expenses.html">Expense</a>
-            <a href="Targets.html">Targets</a>
-            <a href="Savings.html">Savings</a>
-            
-          </div>
+            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
+
+            <div class="dropdown-content">
+                <a href="home.html">Home</a>
+                <a href="Expenses.html">Expenses</a>
+                <a href="Targets.html">Targets</a>
+                <a href="Savings.html">Savings</a>
+            </div>
         </div>
-      </div>
-    <h1>Savings</h1>
-    <p>View your current savings and manage your finances efficiently.</p>
+    </div>
+
+    <div class="container">
+        <h1>Savings</h1>
+        <p>View your current savings and manage your finances efficiently.</p>
+
+        <!-- Savings form -->
+       <!-- Savings form -->
+<form id="savingsForm">
+    <label for="savingsMethod">Savings Method:</label>
+    <select id="savingsMethod">
+        <option value="M-Shwari">M-Shwari</option>
+        <option value="Bank">Bank</option>
+    </select>
+    
+    <label for="savingsDate">Date:</label>
+    <input type="date" id="savingsDate" required>
+    
+    <label for="savingsAmount">Amount:</label>
+    <input type="number" id="savingsAmount" placeholder="Enter amount" required>
+    
+    <button type="submit">Add Savings</button>
+</form>
+
+
+        <!-- Container for displaying savings -->
+        <div id="savingsList"></div>
+    </div>
 </body>
 </html>
+

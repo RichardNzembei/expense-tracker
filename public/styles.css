@@ -1,86 +1,117 @@
 .navbar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #333; /* Dark background color */
-    padding: 10px 20px;
-    display: flex;
-  }
- 
-  
-  .dropdown {
-    position: relative;
-  }
-  
-  .dropbtn {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .dropbtn:hover {
-    background-color: #555; /* Darker shade on hover */
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    right: 0;
-    border-radius: 5px;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #ddd; /* Light gray background on hover */
-  }
-  
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Distribute items evenly */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #831c97;
+  z-index: 1000;
+}
+.dropbtn{
+  padding: 10px 15px;
+  border: none;
+  background-color: #7b8d2a;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer
+
+}
+
+.profile-section {
+  margin-left: 20px; /* Adjust spacing between profile button and menu */
+}
+
+.menu-section {
+  margin-right: 20px; /* Adjust spacing between menu and profile button */
+}
+
+.dropdown {
+  position: relative;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #576868;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: rgb(90, 12, 90);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd; /* Light gray background on hover */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Adjust styles for profile button */
+.profileButton {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profileButton:hover {
+  background-color: #8d7431;
+}
+
   .show {
     display: block;
   }
   
-
 body {
     font-family: Arial, sans-serif;
 }
 
 .container {
-    max-width: 400px;
-    margin: 50px auto;
-    text-align: center;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"], select {
-    margin-bottom: 10px;
-    padding: 8px;
-    width: calc(50% - 5px);
+/* Input field styling */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #4caf50;
-    border: none;
-    color: white;
+/* Button styling */
+#addExpenseBtn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
+#addExpenseBtn:hover {
+  background-color: #35440d;
 }
 
 #expensesList {
@@ -89,8 +120,8 @@ button:hover {
 }
 
 .profile-image {
-    width: 100px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
+    width: 100%; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
     border-radius: 50%; /* Make image circular */
     object-fit: cover; /* Ensure image fills the container */
 }
@@ -110,4 +141,36 @@ button:hover {
 /* Additional CSS styles for enhanced visual appearance */
 .multiples {
     color: blue; /* Change text color to blue */
+}
+/* Animation for images */
+@keyframes slideImage {
+  0% {
+      opacity: 0;
+  }
+  25% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 1;
+  }
+  75% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+.multiple img {
+  /* Responsive image styling */
+
+  max-width: 100%; /* Ensures the image doesn't exceed its container's width */
+  height: auto; /* Allows the image's height to adjust proportionally based on its width */
+
+
+  animation: slideImage 1s infinite;
+}
+
+.multiple img:nth-child(2) {
+  animation-delay: 1s;
 }

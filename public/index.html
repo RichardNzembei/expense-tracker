@@ -3,33 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD:public/index.html
     <title>Expense Tracker</title>
      <link rel="stylesheet" href="styles.css" type="text/css">
     <script src="../scr/createExpensesTable.js" type="text/js"></script>
+=======
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+    <script src="../assets/scripts/script.js"></script>
+    
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h4 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+>>>>>>> 7e63510 (updates):pages/index.html
 </head>
 <body>
     <div class="navbar">
-        
+        <button class="profileButton">Profile</button>
         <div class="dropdown">
-          <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="home.html">Home</a>
-            <a href="Expenses.html">Expense</a>
-            <a href="Targets.html">Targets</a>
-            <a href="Savings.html">Savings</a>
-            
-          </div>
+            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="home.html">Home</a>
+                <a href="Expenses.html">Expense</a>
+                <a href="Targets.html">Targets</a>
+                <a href="Savings.html">Savings</a>
+            </div>
         </div>
-      </div>
-      
+    </div>
 
     <div class="container">
-        <h1>Expense Tracker</h1>
+        
         <div class="multiple">
+<<<<<<< HEAD:public/index.html
           <img src="images/money1.png" alt="Money 1">
             <img src="images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
             </div>
             <p id="motivation">Let's make your transactions easy and traceable!</p>
+=======
+            <img src="../assets/images/money1.png" alt="Money 1" class="profile-image">
+            <img src="../assets/images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
+        </div>
+        <p id="motivation">Let's make your transactions easy and traceable!</p>
+>>>>>>> 7e63510 (updates):pages/index.html
 
         <input type="text" id="expenseInput" placeholder="Enter expense">
         <input type="text" id="amountInput" placeholder="Enter amount">
@@ -42,8 +71,13 @@
         <button id="addExpenseBtn">Add Expense</button>
         <div id="expensesList"></div>
     </div>
+<<<<<<< HEAD:public/index.html
     
     <script src="script.js" type="text/js"></script> ```
+=======
+
+   
+   
+>>>>>>> 7e63510 (updates):pages/index.html
 </body>
 </html>
-
