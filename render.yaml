@@ -1,7 +1,6 @@
 services:
   - name: static-site
     type: static
-    publishDir: public/
-    buildCommand: npm run build
+    
 publishDirectory: public
 
