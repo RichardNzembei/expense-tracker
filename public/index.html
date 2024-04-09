@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Expense Tracker</title>
-     <link rel="stylesheet" href="styles.css" type="text/css">
-    <script src="../scr/createExpensesTable.js" type="text/js"></script>
-    <script src="script.js"></script>
-
+    <title>Expense Tracker - Home</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        .container {
+        /* Additional CSS styles for the slideshow */
+        .slideshow-container {
             max-width: 800px;
             margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
+            overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h4 {
-            color: #333;
+        .slide {
+            display: none;
+            padding: 20px;
         }
 
-        p {
-            color: #666;
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Caption text */
+        .caption {
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
         }
     </style>
-
 </head>
 <body>
     <div class="navbar">
@@ -43,26 +58,62 @@
         </div>
     </div>
 
-    <div class="container">
-        
-        <div class="multiple">
-          <img src="images/money1.png" alt="Money 1">
-            <img src="images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
-            </div>
-            <p id="motivation">Let's make your transactions easy and traceable!</p>
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <h2>Why Track Your Expenses?</h2>
+            <p>Tracking your expenses allows you to:</p>
+            <ul>
+                <li>Understand where your money is going</li>
+                <li>Identify areas where you can save money</li>
+                <li>Plan and budget effectively</li>
+                <li>Achieve your financial goals</li>
+            </ul>
+        </div>
 
-        <input type="text" id="expenseInput" placeholder="Enter expense">
-        <input type="text" id="amountInput" placeholder="Enter amount">
-        <select id="categoryInput">
-            <option value="Food">Food</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Utilities">Utilities</option>
-            <!-- Add more categories as needed -->
-        </select>
-        <button id="addExpenseBtn">Add Expense</button>
-        <div id="expensesList"></div>
+        <div class="slide fade">
+            <h2>Why Save Money?</h2>
+            <p>Saving money is important because it:</p>
+            <ul>
+                <li>Provides financial security</li>
+                <li>Allows you to achieve your long-term goals</li>
+                <li>Provides a safety net for unexpected expenses</li>
+                <li>Opens up opportunities for investments and wealth building</li>
+            </ul>
+        </div>
+
+        <div class="slide fade">
+            <h2>Why Set Financial Targets?</h2>
+            <p>Setting financial targets helps you:</p>
+            <ul>
+                <li>Stay focused on your financial goals</li>
+                <li>Motivate yourself to save and invest</li>
+                <li>Track your progress and make adjustments as needed</li>
+                <li>Plan for major expenses like buying a house or retiring</li>
+            </ul>
+        </div>
+
+        <!-- Previous and Next buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
-    
-    
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+    </script>
 </body>
 </html>

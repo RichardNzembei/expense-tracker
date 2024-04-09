@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expenses</title>
     <link rel="stylesheet" href="styles.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-
-    <script src="../scr/createExpensesTable.js"></script>
-  
 
     <style>
         /* Additional CSS styles for the expense tab */
@@ -30,35 +27,48 @@
             color: #666;
         }
 
-        #expensesList {
+        #spendings {
             margin-top: 20px;
             border-top: 1px solid #ccc;
             padding-top: 10px;
         }
 
-        .expense-item {
+        #spendings div {
             margin-bottom: 10px;
         }
-
-        .expense-item button {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        canvas {
+            margin-top: 20px;
+            max-width: 400px; /* Adjust the maximum width of the canvas */
+            max-height: 400px; /* Adjust the maximum height of the canvas */
         }
 
-        .expense-item button:hover {
-            background-color: #c82333;
+        /* Styles for buttons */
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff; /* Blue color for button background */
+            color: #fff; /* White color for button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for background color change */
+        }
+
+        /* Hover effect for buttons */
+        button:hover {
+            background-color: #0056b3; /* Darker shade of blue on hover */
+        }
+        #spendings{
+            background-color: #666;
+            color: aqua;
+        }
+        p{
+            color: rgb(151, 41, 118);
         }
     </style>
-
 </head>
 <body>
     <div class="navbar">
-        <button class="profileButton"></button> Profile </button>
+        <button class="profileButton">Profile</button>
         <div class="dropdown">
             <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
             <div class="dropdown-content">
@@ -89,24 +99,70 @@
             <button type="submit">Apply Filters</button>
         </form>
 
-        <!-- Expenses list -->
-        <div id="expensesList"></div>
+        <!-- Display filtered expenses here -->
+        <div id="spendings"></div>
 
-        <!-- Total expenses summary -->
-        <p>Total Expenses: <span id="totalExpenses"></span></p>
+
+        <!-- Canvas for graph -->
+        <canvas id="expenseChart" width="800" height="400"></canvas>
     </div>
 
     <script>
-        // Initialize Typed.js for dynamic text
-        document.addEventListener('DOMContentLoaded', function() {
-            const typed = new Typed('.multiples', {
-                strings: ['Expense Tracker', 'Money Manager', 'Financial Planner'],
-                typeSpeed: 100,
-                loop: true,
-                showCursor: false
-            });
-        });
+        // Retrieve expenses data from local storage
+        const storedExpenses = localStorage.getItem("expensesList");
+        let expensesData = [];
+
+        if (storedExpenses) {
+            expensesData = JSON.parse(storedExpenses);
+        } else {
+            console.error('No expenses data found in local storage.');
+        }
+
+        // Filter expenses data for each category
+        const foodExpenses = expensesData.filter(expense => expense.category === 'Food');
+        const transportExpenses = expensesData.filter(expense => expense.category === 'Transportation');
+        const utilitiesExpenses = expensesData.filter(expense => expense.category === 'Utilities');
+
+        // Calculate total expenses for each category
+        const totalFoodExpenses = foodExpenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
+        const totalTransportExpenses = transportExpenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
+        const totalUtilitiesExpenses = utilitiesExpenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
+
+        // Create data for pie chart
+        const chartData = {
+            labels: ['Food', 'Transportation', 'Utilities'],
+            datasets: [{
+                label: 'Spendings',
+                data: [totalFoodExpenses, totalTransportExpenses, totalUtilitiesExpenses],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Create the graph as a pie chart
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+    type: 'pie',
+    data: chartData,
+    options: {
+        legend: {
+            display: true,
+            position: 'right', // Position legend on the right side
+            align: 'start', // Align legend to the start of the right side
+        }
+    }
+});
+
+
     </script>
 </body>
 </html>
-

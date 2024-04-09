@@ -1,4 +1,105 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const MAX_RECENT_EXPENSES = 3;
+
+    // Event listener for the Add Expense button
+    const addExpenseBtn = document.getElementById('addExpenseBtn');
+    if (addExpenseBtn) {
+        addExpenseBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Call the function to add expense and store it in local storage
+            addExpenseAndStore();
+        });
+    } else {
+        console.error('Add Expense button element not found.');
+    }
+
+    
+  // Function to add expense to local storage and update the expenses list
+  function addExpenseAndStore() {
+    // Get expense details
+    var expenseName = document.getElementById("expenseInput").value;
+    var expenseAmount = document.getElementById("amountInput").value;
+    var expenseDate = document.getElementById("dateInput").value;
+    var expenseCategory = document.getElementById("categoryInput").value;
+
+    // Construct an object representing the expense
+    var newExpense = {
+        name: expenseName,
+        amount: expenseAmount,
+        date: expenseDate,
+        category: expenseCategory
+    };
+
+    // Get existing expenses from local storage or initialize an empty array
+    var expensesList = localStorage.getItem("expensesList");
+    expensesList = expensesList ? JSON.parse(expensesList) : [];
+
+    // Add the new expense to the expenses list
+    expensesList.push(newExpense);
+
+    // Store the updated expenses list in local storage
+    localStorage.setItem("expensesList", JSON.stringify(expensesList));
+
+    // Update the display with the new expense
+    updateExpensesList(expensesList);
+}
+
+function updateExpensesList(expensesList) {
+    const recentExpensesListElement = document.getElementById('recentExpenses');
+    if (!recentExpensesListElement) {
+        console.error('Recent expenses list element not found.');
+        return;
+    }
+
+    // Clear existing list items
+    recentExpensesListElement.innerHTML = '';
+
+    // Determine the number of recent expenses to display
+    const numExpensesToShow = Math.min(expensesList.length, MAX_RECENT_EXPENSES);
+
+    // Create and append new list items for each recent expense
+    for (let i = 0; i < numExpensesToShow; i++) {
+        const expense = expensesList[i];
+        const listItem = document.createElement('li');
+        listItem.textContent = `${expense.name}: KSH${expense.amount} (${expense.date}) - ${expense.category}`;
+        recentExpensesListElement.appendChild(listItem);
+    }
+
+    // Show "View All" link if there are more than MAX_RECENT_EXPENSES expenses
+    if (expensesList.length > MAX_RECENT_EXPENSES) {
+        const viewAllLink = document.createElement('a');
+        viewAllLink.textContent = 'View All';
+        viewAllLink.href = '#'; // Add the appropriate link to view all expenses
+        viewAllLink.onclick = function() {
+            // Display all expenses
+            displayAllExpenses(expensesList);
+            return false; // Prevent default link behavior
+        };
+        recentExpensesListElement.appendChild(viewAllLink);
+    }
+}
+
+
+
+    // Function to display all expenses
+    function displayAllExpenses(expensesList) {
+        // Display all expenses as needed, for example, in a modal or a separate page
+        console.log('All expenses:', expensesList);
+        // You can implement your own logic to display all expenses here
+        alert('All expenses displayed in console.');
+    }
+
+    // Retrieve and display expenses list from local storage on page load
+    const storedExpenses = localStorage.getItem("expensesList");
+    if (storedExpenses) {
+        const parsedExpenses = JSON.parse(storedExpenses);
+        updateExpensesList(parsedExpenses);
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
 
@@ -147,43 +248,9 @@ function loginUser() {
 }
 
 
-var firebaseConfig = {
-    apiKey: "AIzaSyD51C570ce5JdyeuGBI0aayFKdKwlAiKes",
-    authDomain: "expense-tracker-33e45.firebaseapp.com",
-    databaseURL: "https://expense-tracker-33e45-default-rtdb.firebaseio.com",
-    projectId: "expense-tracker-33e45",
-    storageBucket: "expense-tracker-33e45.appspot.com",
-    messagingSenderId: "180308378313",
-    appId: "1:180308378313:web:38ac7229537c376c0b4318",
-    measurementId: "G-5TK8ZKVTHY"
-};
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-    // Initialize Firebase
-    
-    const expenses = [];
 
-    // Firebase initialization (assuming you've already included Firebase SDK scripts in the HTML)
 
-    // Function to add expense to the list
-    function addExpense(description, amount, date, category) {
-        if (!description || isNaN(amount) || amount <= 0 || !category) {
-            alert('Please enter a valid expense description, amount, and category.');
-            return;
-        }
-
-        // Create a reference to the 'expenses' node in the database
-        const expensesRef = firebase.database().ref('expenses');
-
-        // Push the new expense data to the 'expenses' node
-        expensesRef.push({
-            description: description,
-            amount: amount,
-            date: date,
-            category: category
-        });
-    }
 
     // Function to update the displayed expenses list
     function updateExpensesList() {
@@ -208,30 +275,6 @@ firebase.initializeApp(firebaseConfig);
             listItem.textContent = `${expense.description} - ${expense.amount} (${expense.category}) - ${expense.date}`;
             expensesList.appendChild(listItem);
         }
-    }
-
-    // Event listener for the Add Expense button
-    const addExpenseBtn = document.getElementById('addExpenseBtn');
-    if (addExpenseBtn) {
-        addExpenseBtn.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            const description = document.getElementById('expenseInput').value.trim();
-            const amount = parseFloat(document.getElementById('amountInput').value);
-            const date = document.getElementById('dateInput').value;
-            const category = document.getElementById('categoryInput').value;
-
-            addExpense(description, amount, date, category);
-
-            // Update the expenses list after adding the expense
-            updateExpensesList();
-
-            // Clear input fields after adding expense
-            document.getElementById('expenseInput').value = '';
-            document.getElementById('amountInput').value = '';
-            document.getElementById('dateInput').value = '';
-        });
-    } else {
-        console.error('Add Expense button element not found.');
     }
 
 
@@ -419,4 +462,92 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error('Set Target form element not found.');
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve expenses list from local storage on page load
+    let expensesList = JSON.parse(localStorage.getItem("expensesList")) || [];
+
+    // Function to update the displayed expenses list based on filters
+    function updateFilteredExpenses(categoryFilter, dateFilter) {
+        // Filter expenses based on selected category and date
+        let filteredExpenses = expensesList;
+        if (categoryFilter) {
+            filteredExpenses = filteredExpenses.filter(expense => expense.category === categoryFilter);
+        }
+        if (dateFilter) {
+            filteredExpenses = filteredExpenses.filter(expense => expense.date === dateFilter);
+        }
+
+        // Display only the last five spendings
+        const lastFiveExpenses = filteredExpenses.slice(-5);
+
+        // Display filtered expenses in the "spendings" div
+        const spendingsDiv = document.getElementById('spendings');
+        if (!spendingsDiv) {
+            console.error('Spendings div element not found.');
+            return;
+        }
+
+        // Clear existing content
+        spendingsDiv.innerHTML = '';
+
+        // Display filtered expenses
+        if (lastFiveExpenses.length > 0) {
+            lastFiveExpenses.forEach(expense => {
+                const expenseElement = document.createElement('div');
+                expenseElement.textContent = `${expense.name}: KSH${expense.amount} (${expense.date}) - ${expense.category}`;
+                spendingsDiv.appendChild(expenseElement);
+            });
+        } else {
+            const noExpensesMessage = document.createElement('p');
+            noExpensesMessage.textContent = 'No expenses found matching the selected filters.';
+            spendingsDiv.appendChild(noExpensesMessage);
+        }
+
+        // Add a "Show All" button
+        const showAllButton = document.createElement('button');
+        showAllButton.textContent = 'Show All';
+        showAllButton.addEventListener('click', function() {
+            // Clear spendings div
+            spendingsDiv.innerHTML = '';
+
+            // Display all filtered expenses
+            filteredExpenses.forEach(expense => {
+                const expenseElement = document.createElement('div');
+                expenseElement.textContent = `${expense.name}: KSH${expense.amount} (${expense.date}) - ${expense.category}`;
+                spendingsDiv.appendChild(expenseElement);
+            });
+
+            // Add a "Hide" button
+            const hideButton = document.createElement('button');
+            hideButton.textContent = 'Hide';
+            hideButton.addEventListener('click', function() {
+                // Clear spendings div and display only the last five spendings
+                updateFilteredExpenses(categoryFilter, dateFilter);
+            });
+            spendingsDiv.appendChild(hideButton);
+        });
+        spendingsDiv.appendChild(showAllButton);
+    }
+
+    // Event listener for the expense filter form submission
+    const expenseFilterForm = document.getElementById('expenseFilterForm');
+    if (expenseFilterForm) {
+        expenseFilterForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get selected filter values
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+
+            // Update the displayed expenses list based on filters
+            updateFilteredExpenses(categoryFilter, dateFilter);
+        });
+    } else {
+        console.error('Expense filter form element not found.');
+    }
+
+    // Update the initial display of expenses on page load
+    updateFilteredExpenses(null, null);
 });

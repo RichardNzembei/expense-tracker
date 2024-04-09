@@ -155,4 +155,26 @@ select {
   animation: slideImage 1s infinite;
 }
 
+#expensesList {
+  background-color: #576868;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  max-height: 300px; /* Adjust height as needed */
+  overflow-y: auto; /* Add scrollbar if content overflows */
+}
+
+#expensesList li {
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+#expensesList a {
+  color: blue;
+  text-decoration: none;
+  margin-left: 10px;
+}
 
