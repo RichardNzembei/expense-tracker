@@ -1,3 +1,152 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+
+    // Function to handle form submission for registration
+    registerForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Validate form fields
+        if (validateRegisterForm()) {
+            // If form is valid, send data to backend using AJAX
+            const formData = new FormData(registerForm);
+            fetch('/register', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Registration successful!'); // Show success message
+                    registerForm.reset(); // Reset form after successful registration
+                } else {
+                    alert('Registration failed. Please try again.'); // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.'); // Show error message
+            });
+        }
+    });
+
+    // Function to handle form submission for login
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Validate form fields
+        if (validateLoginForm()) {
+            // If form is valid, send data to backend using AJAX
+            const formData = new FormData(loginForm);
+            fetch('/login', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Login successful!'); // Show success message
+                    loginForm.reset(); // Reset form after successful login
+                } else {
+                    alert('Login failed. Please check your credentials and try again.'); // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.'); // Show error message
+            });
+        }
+    });
+
+    // Function to validate registration form fields
+    function validateRegisterForm() {
+        const username = registerForm.username.value.trim();
+        const email = registerForm.email.value.trim();
+        const password = registerForm.password.value.trim();
+
+        // Basic validation: check if fields are not empty
+        if (username === '' || email === '' || password === '') {
+            alert('Please fill in all fields.');
+            return false; // Form is invalid
+        }
+        return true; // Form is valid
+    }
+
+    // Function to validate login form fields
+    function validateLoginForm() {
+        const username = loginForm.username.value.trim();
+        const password = loginForm.password.value.trim();
+
+        // Basic validation: check if fields are not empty
+        if (username === '' || password === '') {
+            alert('Please fill in all fields.');
+            return false; // Form is invalid
+        }
+        return true; // Form is valid
+    }
+});
+function registerUser() {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !email || !password) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // You can replace '/register' with the actual endpoint for registration
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Registration successful!');
+            document.getElementById('registerForm').reset();
+        } else {
+            alert('Registration failed. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+    });
+}
+
+function loginUser() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !password) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // You can replace '/login' with the actual endpoint for login
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Login successful!');
+            document.getElementById('loginForm').reset();
+        } else {
+            alert('Login failed. Please check your credentials and try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+    });
+}
+
+
 var firebaseConfig = {
     apiKey: "AIzaSyD51C570ce5JdyeuGBI0aayFKdKwlAiKes",
     authDomain: "expense-tracker-33e45.firebaseapp.com",
