@@ -1,16 +1,5 @@
 services:
-  - name: expense_tracker
-    type: web
+  - name: static-site
+    type: static
     buildCommand: npm install && npm run build
-    startCommand: node server.js
-    routes:
-      - path: /
-        directory: public
-        headers:
-          Content-Type: text/html
-      - path: /images
-        directory: public/images
-      - path: /scr
-        directory: scr
-        headers:
-          Content-Type: text/javascript
+    staticPublishPath: public
