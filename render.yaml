@@ -1,5 +1,4 @@
-
-  services:
+services:
   - name: expense_tracker
     type: web
     buildCommand: npm install && npm run build
@@ -9,8 +8,9 @@
         directory: public
         headers:
           Content-Type: text/html
-      - path: /static
-        directory: public
+      - path: /images
+        directory: public/images
+      - path: /scr
+        directory: scr
         headers:
-          Content-Type: text/plain
-
+          Content-Type: text/javascript
