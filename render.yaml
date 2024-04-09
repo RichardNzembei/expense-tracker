@@ -3,3 +3,4 @@ services:
     type: static
     buildCommand: npm install && npm run build
     staticPublishPath: public
+    publishDir: public/
