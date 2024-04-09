@@ -1,10 +1,16 @@
-services:
-  - name: your-service-name
+
+  services:
+  - name: expense_tracker
     type: web
-    env: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: node server.js
     routes:
-      - path: /*
+      - path: /
+        directory: public
         headers:
           Content-Type: text/html
+      - path: /static
+        directory: public
+        headers:
+          Content-Type: text/plain
+
