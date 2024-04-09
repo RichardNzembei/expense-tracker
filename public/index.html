@@ -6,42 +6,62 @@
     <title>Expense Tracker - Home</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional CSS styles for the slideshow */
-        .slideshow-container {
+        .container {
             max-width: 800px;
             margin: 50px auto;
-            overflow: hidden;
+            background-color: #f9f9f9;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        /* Additional CSS styles for the vertical layout */
         .slide {
-            display: none;
             padding: 20px;
+            border-bottom: 1px solid #ccc;
+            background-color: #fff;
+            overflow: hidden;
+            max-height: 50px; /* Adjust this value to control the initial height */
+            transition: max-height 0.3s ease;
         }
 
-        .slide img {
-            width: 100%;
-            height: auto;
+        .slide:hover {
+            max-height: 200px; /* Adjust this value to control the expanded height */
         }
 
-        /* Caption text */
-        .caption {
-            margin-top: 20px;
-            color: #333;
+        .slide h2 {
+            color: #0981d1;
+            margin-bottom: 10px;
+        }
+
+        .slide p,
+        .slide ul {
+            color: #6b1057;
+        }
+
+        .slide ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        .slide ul li {
+            margin-bottom: 5px;
+        }
+
+        .start-info {
             text-align: center;
+            padding: 30px;
+            background-color: #588186;
+            border-bottom: 10px solid #835050;
         }
+        h2{
+            color: rgb(131, 32, 118);
+        }
+        p{
+            color: rgb(22, 24, 23);
+        }
+        
 
-        /* Fading animation */
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-
-        @keyframes fade {
-            from {opacity: 0.4}
-            to {opacity: 1}
-        }
     </style>
 </head>
 <body>
@@ -57,9 +77,10 @@
             </div>
         </div>
     </div>
+    <div class="start-info">To get started visit Home on Menu</Menu></div>
 
-    <div class="slideshow-container">
-        <div class="slide fade">
+    <div class="container">
+        <div class="slide">
             <h2>Why Track Your Expenses?</h2>
             <p>Tracking your expenses allows you to:</p>
             <ul>
@@ -70,7 +91,7 @@
             </ul>
         </div>
 
-        <div class="slide fade">
+        <div class="slide">
             <h2>Why Save Money?</h2>
             <p>Saving money is important because it:</p>
             <ul>
@@ -81,7 +102,7 @@
             </ul>
         </div>
 
-        <div class="slide fade">
+        <div class="slide">
             <h2>Why Set Financial Targets?</h2>
             <p>Setting financial targets helps you:</p>
             <ul>
@@ -91,29 +112,13 @@
                 <li>Plan for major expenses like buying a house or retiring</li>
             </ul>
         </div>
-
-        <!-- Previous and Next buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
-
-    <script>
-        let slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            let slides = document.getElementsByClassName("slide");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex - 1].style.display = "block";
-        }
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-    </script>
+    <div class="video-container">
+        <p>If you're interested in learning more about money and its relation to monetary, visit <a href="https://youtu.be/6nSwT_5GoJk?si=WbqGASiRTHl0-FdG" target="_blank">this site</a> to learn more.</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
+        <p>References: Reuben Devs</p>
+    </footer>
 </body>
 </html>
