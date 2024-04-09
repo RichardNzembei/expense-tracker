@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Display only the last five spendings
-        const lastFiveExpenses = filteredExpenses.slice(-5);
+        const lastFiveExpenses = filteredExpenses.slice(-3);
 
         // Display filtered expenses in the "spendings" div
         const spendingsDiv = document.getElementById('spendings');
