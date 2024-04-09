@@ -1,0 +1,10 @@
+services:
+  - name: your-service-name
+    type: web
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    routes:
+      - path: /*
+        headers:
+          Content-Type: text/html
