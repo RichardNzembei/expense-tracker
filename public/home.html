@@ -9,13 +9,16 @@ l
     <script src="script.js"></script>
   
 <style>
-        .container {
+            .container {
             max-width: 800px;
             margin: 50px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Enable vertical scrolling */
+            height: calc(100vh - 170px); /* Adjusted to accommodate footer height and some padding */
+            padding-bottom: 50px; /* Adjusted to accommodate footer height */
         }
         h1, h4 {
             color: #333;
