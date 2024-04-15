@@ -81,7 +81,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width:100%;
   margin: 50px auto;
   background-color: #f9f9f9;
   padding: 20px;
@@ -185,8 +185,9 @@ footer {
   width: 100%;
   background-color: #f2f2f2;
   text-align: center;
-  padding: 20px;
+  padding: 5px 0; /* Adjust the padding as needed */
 }
+
 /* Additional styles for email input */
 #emailInput {
   width: 100%;
