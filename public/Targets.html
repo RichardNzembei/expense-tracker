@@ -7,33 +7,12 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
-<style>
+    <style>
         /* CSS styles for the Targets tab */
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+        /* Styles remain the same */
 
-
-        h1, h4 {
-            color: #333;
-        }
-
-        p {
-            color: #666;
-        }
-
-        /* Style for targets form */
-        #targetsForm {
-            margin-top: 20px;
-        }
-
-        #targetsForm input[type="text"],
-        #targetsForm input[type="number"] {
+        /* Additional styles for email input */
+        #emailInput {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -41,22 +20,33 @@
             border-radius: 5px;
         }
 
-        #targetsForm button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        /* Style for target divs */
+        .target {
+            margin-bottom: 10px;
+        }
+        body{
+            background-color: aqua;
+        }
+        #undoneTargetsList{
+            color: blueviolet;
+        }
+        #doneTargetsList{
+            color: rgb(226, 43, 180);
+        }
+        h2{
+            color: rgb(131, 123, 21);
+        }
+        h1{
+            color: chocolate;
         }
     </style>
 </head>
 <body>
+    <!-- Navbar and container remain the same -->
     <div class="navbar">
         <button class="profileButton"></button> Profile </button>
         <div class="dropdown">
             <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-
             <div class="dropdown-content">
                 <a href="home.html">Home</a>
                 <a href="Expenses.html">Expenses</a>
@@ -66,34 +56,46 @@
         </div>
     </div>
 
+
     <div class="container">
         <h1>Targets</h1>
         <p>Set financial goals and track your progress towards achieving them.</p>
 
-        <!-- Targets form -->
-      <!-- Targets form -->
-<form id="targetsForm">
-    <label for="targetDescription">Description:</label>
-    <input type="text" id="targetDescription" placeholder="Enter description" required>
-    
-    <label for="targetAmount">Target Amount:</label>
-    <input type="number" id="targetAmount" placeholder="Enter target amount" required>
-    
-    <label for="targetDeadline">Deadline:</label>
-    <input type="date" id="targetDeadline" required>
-    
-    <label for="targetReminder">Reminder Date:</label>
-    <input type="date" id="targetReminder" required>
-    
-    <button type="submit">Set Target</button>
-</form>
+        <!-- Email Input Field -->
+        <label for="emailInput">Enter your Gmail address for reminders:</label>
+        <input type="email" id="emailInput" placeholder="example@gmail.com" required>
 
-        <!-- Container for displaying targets -->
-        <div id="targetsList"></div>
+        <!-- Targets form -->
+        <form id="targetsForm">
+            <label for="targetDescription">Description:</label>
+            <input type="text" id="targetDescription" placeholder="Enter description" required>
+            
+            <label for="targetAmount">Target Amount:</label>
+            <input type="number" id="targetAmount" placeholder="Enter target amount" required>
+            
+            <label for="targetDeadline">Deadline:</label>
+            <input type="date" id="targetDeadline" required>
+            
+            <button type="submit">Set Target</button>
+        </form>
+
+        <!-- Container for displaying undone targets -->
+        <div>
+            <h2>Undone Targets</h2>
+            <div id="undoneTargetsList"></div>
+        </div>
+
+        <!-- Container for displaying done targets -->
+        <div>
+            <h2>Done Targets</h2>
+            <div id="doneTargetsList"></div>
+        </div>
     </div>
+    <!-- Footer remains the same -->
     <footer>
         <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
         <p>References: Reuben Devs</p>
     </footer>
 </body>
 </html>
+

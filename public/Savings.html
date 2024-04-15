@@ -6,56 +6,89 @@
     <title>Savings</title>
 
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="script.js"></script>
-<style>
-        /* CSS styles for the Savings tab */
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: hsl(173, 11%, 86%);
         }
 
+       
 
-        h1, h4 {
-            color: #333;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #cea0a0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #240b7e;
         }
 
         p {
-            color: #666;
+            color: #0f4e1f;
         }
 
-        /* Style for savings form */
-        #savingsForm {
-            margin-top: 20px;
+        form {
+            margin-bottom: 20px;
         }
 
-        #savingsForm input[type="text"],
-        #savingsForm input[type="number"] {
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #a8183c;
+        }
+
+        input[type="date"],
+        input[type="number"],
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
             border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
-        #savingsForm button {
+        button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #106e99;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
-        #savingsForm select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        button:hover {
+            background-color: #555;
+        }
+
+        #savingsList {
+            margin-top: 20px;
+        }
+
+        #recentSavings {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        #showAllSavingsPlaceholder {
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
         }
     </style>
 </head>
@@ -64,7 +97,6 @@
         <button class="profileButton"></button> Profile </button>
         <div class="dropdown">
             <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-
             <div class="dropdown-content">
                 <a href="home.html">Home</a>
                 <a href="Expenses.html">Expenses</a>
@@ -79,31 +111,36 @@
         <p>View your current savings and manage your finances efficiently.</p>
 
         <!-- Savings form -->
-       <!-- Savings form -->
-<form id="savingsForm">
-    <label for="savingsMethod">Savings Method:</label>
-    <select id="savingsMethod">
-        <option value="M-Shwari">M-Shwari</option>
-        <option value="Bank">Bank</option>
-    </select>
-    
-    <label for="savingsDate">Date:</label>
-    <input type="date" id="savingsDate" required>
-    
-    <label for="savingsAmount">Amount:</label>
-    <input type="number" id="savingsAmount" placeholder="Enter amount" required>
-    
-    <button type="submit">Add Savings</button>
-</form>
+        <form id="savingsForm">
+            <label for="savingsMethod">Savings Method:</label>
+            <select id="savingsMethod">
+                <option value="M-Shwari">M-Shwari</option>
+                <option value="Bank">Bank</option>
+            </select>
+            
+            <label for="savingsDate">Date:</label>
+            <input type="date" id="savingsDate" required>
+            
+            <label for="savingsAmount">Amount:</label>
+            <input type="number" id="savingsAmount" placeholder="Enter amount" required>
+            
+            <button type="submit">Add Savings</button>
+        </form>
 
+        <!-- Container for displaying recent savings -->
+        <div id="recentSavings"></div>
 
-        <!-- Container for displaying savings -->
-        <div id="savingsList"></div>
+        <!-- Placeholder for the "Show All Savings" button -->
+        <div id="showAllSavingsPlaceholder"></div>
     </div>
+    <canvas id="savingsChart" width="800" height="400"></canvas>
+
+
     <footer>
         <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
         <p>References: Reuben Devs</p>
     </footer>
+
+    
 </body>
 </html>
-

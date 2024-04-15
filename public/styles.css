@@ -187,3 +187,46 @@ footer {
   text-align: center;
   padding: 20px;
 }
+/* Additional styles for email input */
+#emailInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for target divs */
+.target {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for undone targets */
+#undoneTargetsList {
+  margin-bottom: 20px;
+}
+
+/* Style for done targets */
+#doneTargetsList {
+  margin-bottom: 20px;
+}
+
+/* Animation for target divs */
+.target {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

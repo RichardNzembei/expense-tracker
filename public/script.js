@@ -302,12 +302,12 @@ window.onclick = function(event) {
   }
 }
 document.addEventListener('DOMContentLoaded', function() {
-  const typed = new Typed('.multiples', {
-      strings: ['Expense Tracker', 'Money Manager', 'Financial Planner'],
-      typeSpeed: 100,
-      loop: true,
-      showCursor: false
-  });
+    const typed = new Typed('.multiples', {
+        strings: ['Expense Tracker', 'Money Manager', 'Financial Planner'],
+        typeSpeed: 100,
+        loop: true,
+        showCursor: false
+    });
 });
 
 
@@ -353,116 +353,8 @@ function toggleImages() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const savings = []; // Array to store savings
 
-    // Function to add savings to the list
-    function addSavings(method, date, amount) {
-        if (!method || !date || isNaN(amount) || amount <= 0) {
-            alert('Please fill out all fields correctly.');
-            return;
-        }
 
-        const saving = { method, date, amount };
-        savings.push(saving);
-        updateSavingsList();
-    }
-
-    // Function to update the displayed savings list
-    function updateSavingsList() {
-        const savingsList = document.getElementById('savingsList');
-        if (!savingsList) {
-            console.error('Savings list element not found.');
-            return;
-        }
-
-        savingsList.innerHTML = ''; // Clear existing list items
-        for (const saving of savings) {
-            const listItem = document.createElement('div');
-            listItem.textContent = `${saving.method} - ${saving.date}: $${saving.amount}`;
-            savingsList.appendChild(listItem);
-        }
-    }
-
-    // Event listener for the Add Savings form submission
-    const addSavingsForm = document.getElementById('savingsForm');
-    if (addSavingsForm) {
-        addSavingsForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            const method = document.getElementById('savingsMethod').value;
-            const date = document.getElementById('savingsDate').value;
-            const amount = parseFloat(document.getElementById('savingsAmount').value);
-
-            addSavings(method, date, amount);
-
-            // Clear the form fields after adding savings
-            document.getElementById('savingsMethod').value = 'M-Shwari'; // Reset savings method
-            document.getElementById('savingsDate').value = ''; // Reset date
-            document.getElementById('savingsAmount').value = ''; // Reset amount
-        });
-    } else {
-        console.error('Add Savings form element not found.');
-    }
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const targets = []; // Array to store targets
-
-    // Function to add target to the list
-    function addTarget(description, amount, deadline, reminder) {
-        if (!description || isNaN(amount) || amount <= 0 || !deadline || !reminder) {
-            alert('Please fill out all fields correctly.');
-            return;
-        }
-
-        const target = { description, amount, deadline, reminder };
-        targets.push(target);
-        updateTargetsList();
-    }
-
-    // Function to update the displayed targets list
-    function updateTargetsList() {
-        const targetsList = document.getElementById('targetsList');
-        if (!targetsList) {
-            console.error('Targets list element not found.');
-            return;
-        }
-
-        targetsList.innerHTML = ''; // Clear existing list items
-        for (const target of targets) {
-            const listItem = document.createElement('div');
-            listItem.innerHTML = `
-                <strong>Description:</strong> ${target.description}<br>
-                <strong>Target Amount:</strong> $${target.amount}<br>
-                <strong>Deadline:</strong> ${target.deadline}<br>
-                <strong>Reminder Date:</strong> ${target.reminder}<br>
-                <hr>
-            `;
-            targetsList.appendChild(listItem);
-        }
-    }
-
-    // Event listener for the Set Target form submission
-    const addTargetForm = document.getElementById('targetsForm');
-    if (addTargetForm) {
-        addTargetForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            const description = document.getElementById('targetDescription').value.trim();
-            const amount = parseFloat(document.getElementById('targetAmount').value);
-            const deadline = document.getElementById('targetDeadline').value;
-            const reminder = document.getElementById('targetReminder').value;
-
-            addTarget(description, amount, deadline, reminder);
-
-            // Clear the form fields after adding target
-            document.getElementById('targetDescription').value = '';
-            document.getElementById('targetAmount').value = '';
-            document.getElementById('targetDeadline').value = '';
-            document.getElementById('targetReminder').value = '';
-        });
-    } else {
-        console.error('Set Target form element not found.');
-    }
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Retrieve expenses list from local storage on page load
@@ -551,3 +443,296 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update the initial display of expenses on page load
     updateFilteredExpenses(null, null);
 });
+// Function to update the text inside the .multiples span
+function updateWelcomeText() {
+    var welcomeSpan = document.querySelector('.multiples');
+    var welcomeText = 'money tracker expenses manager and savings';
+
+    welcomeSpan.textContent = welcomeText;
+}
+
+// Call the function when the page loads to update the welcome text
+window.onload = function() {
+    updateWelcomeText();
+};
+document.addEventListener("DOMContentLoaded", function() {
+    // Load targets from local storage when the page loads
+    loadTargets();
+
+    // Add event listener to form submission
+    document.getElementById("targetsForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form values
+        var description = document.getElementById("targetDescription").value;
+        var amount = document.getElementById("targetAmount").value;
+        var deadline = document.getElementById("targetDeadline").value;
+        var email = document.getElementById("emailInput").value;
+
+        // Validate form inputs (add your validation logic here)
+
+        // Create target object
+        var target = {
+            description: description,
+            amount: amount,
+            deadline: deadline,
+            achieved: false // Initialize achieved status to false
+        };
+
+        // Save target to local storage
+        saveTarget(target);
+
+        // Clear form fields
+        document.getElementById("targetDescription").value = "";
+        document.getElementById("targetAmount").value = "";
+        document.getElementById("targetDeadline").value = "";
+    });
+});
+
+function saveTarget(target) {
+    // Get existing targets from local storage or initialize an empty array
+    var targets = JSON.parse(localStorage.getItem("targets")) || [];
+
+    // Add the new target to the array
+    targets.push(target);
+
+    // Save the updated array back to local storage
+    localStorage.setItem("targets", JSON.stringify(targets));
+
+    // Display the updated list of targets
+    displayTargets();
+}
+
+function loadTargets() {
+    // Get targets from local storage
+    var targets = JSON.parse(localStorage.getItem("targets")) || [];
+
+    // Display targets
+    displayTargets();
+}
+
+function displayTargets() {
+    // Get targets from local storage
+    var targets = JSON.parse(localStorage.getItem("targets")) || [];
+
+    // Get the containers for displaying targets
+    var undoneTargetsList = document.getElementById("undoneTargetsList");
+    var doneTargetsList = document.getElementById("doneTargetsList");
+
+    // Clear the containers
+    undoneTargetsList.innerHTML = "";
+    doneTargetsList.innerHTML = "";
+
+    // Display each target
+    targets.forEach(function(target, index) {
+        // Create a div for the target
+        var targetDiv = document.createElement("div");
+        targetDiv.classList.add("target");
+
+        // Display target details
+        targetDiv.innerHTML = `
+            <input type="checkbox" id="target${index}" ${target.achieved ? "checked" : ""}>
+            <label for="target${index}">${target.description} - ${target.amount} by ${target.deadline}</label>
+        `;
+
+        // Add event listener to the checkbox to update achieved status
+        targetDiv.querySelector("input[type='checkbox']").addEventListener("change", function() {
+            // Update achieved status of the target
+            targets[index].achieved = this.checked;
+
+            // Save updated targets to local storage
+            localStorage.setItem("targets", JSON.stringify(targets));
+
+            // Re-display targets
+            displayTargets();
+        });
+
+        // Append the target div to the appropriate container
+        if (target.achieved) {
+            doneTargetsList.appendChild(targetDiv);
+        } else {
+            undoneTargetsList.appendChild(targetDiv);
+        }
+    });
+}
+// JavaScript for managing savings
+
+// Variable to track whether all savings are shown
+var allSavingsShown = false;
+
+// Function to toggle the dropdown menu
+function toggleDropdown() {
+    document.querySelector(".dropdown-content").classList.toggle("show");
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const MAX_RECENT_SAVINGS = 3;
+
+    // Event listener for the Add Savings button
+    const addSavingsForm = document.getElementById('savingsForm');
+    if (addSavingsForm) {
+        addSavingsForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Call the function to add savings and store it in local storage
+            addSavingsAndStore();
+        });
+    } else {
+        console.error('Savings form element not found.');
+    }
+
+    // Load and display initial savings list on page load
+    const savedSavings = localStorage.getItem('savingsList');
+    let savingsList = savedSavings ? JSON.parse(savedSavings) : [];
+    updateSavingsList(savingsList);
+
+    // Function to add savings to local storage and update the savings list
+    function addSavingsAndStore() {
+        // Get savings details
+        var savingsMethod = document.getElementById("savingsMethod").value;
+        var savingsDate = document.getElementById("savingsDate").value;
+        var savingsAmount = document.getElementById("savingsAmount").value;
+
+        // Construct an object representing the savings
+        var newSavings = {
+            method: savingsMethod,
+            date: savingsDate,
+            amount: savingsAmount
+        };
+
+        // Add the new savings to the savings list
+        savingsList.push(newSavings);
+
+        // Store the updated savings list in local storage
+        localStorage.setItem("savingsList", JSON.stringify(savingsList));
+
+        // Clear the input fields
+        document.getElementById("savingsMethod").value = "";
+        document.getElementById("savingsDate").value = "";
+        document.getElementById("savingsAmount").value = "";
+
+        // Update the display with the new savings
+        updateSavingsList(savingsList);
+    }
+
+    // Function to update the savings list
+    function updateSavingsList(savingsList) {
+        const recentSavingsListElement = document.getElementById('recentSavings');
+        const showAllSavingsPlaceholder = document.getElementById('showAllSavingsPlaceholder');
+        if (!recentSavingsListElement || !showAllSavingsPlaceholder) {
+            console.error('Recent savings list or Show All Savings placeholder not found.');
+            return;
+        }
+
+        // Clear existing list items
+        recentSavingsListElement.innerHTML = '';
+        showAllSavingsPlaceholder.innerHTML = '';
+
+        // Determine the number of recent savings to display
+        const numSavingsToShow = Math.min(savingsList.length, MAX_RECENT_SAVINGS);
+
+        // Create and append new list items for each recent savings
+        for (let i = 0; i < numSavingsToShow; i++) {
+            const savings = savingsList[i];
+            const listItem = document.createElement('div');
+            listItem.textContent = `${savings.method} - ${savings.date}: ksh${savings.amount}`;
+            recentSavingsListElement.appendChild(listItem);
+        }
+
+        // Show "Show All Savings" button if there are more than MAX_RECENT_SAVINGS savings
+        if (savingsList.length > MAX_RECENT_SAVINGS) {
+            const showAllButton = document.createElement('button');
+            showAllButton.textContent = 'Show All Savings';
+            showAllButton.addEventListener('click', function() {
+                displayAllSavings(savingsList);
+            });
+            showAllSavingsPlaceholder.appendChild(showAllButton);
+        }
+    }
+
+    // Function to display all savings
+    function displayAllSavings(savingsList) {
+        // Clear existing list items
+        const recentSavingsListElement = document.getElementById('recentSavings');
+        recentSavingsListElement.innerHTML = '';
+
+        // Create and append new list items for all savings
+        savingsList.forEach(function(savings) {
+            const listItem = document.createElement('div');
+            listItem.textContent = `${savings.method} - ${savings.date}: ksh${savings.amount}`;
+            recentSavingsListElement.appendChild(listItem);
+        });
+
+        // Clear the "Show All Savings" button
+        const showAllSavingsPlaceholder = document.getElementById('showAllSavingsPlaceholder');
+        showAllSavingsPlaceholder.innerHTML = '';
+
+        // Create and append the "Hide Savings" button
+        const hideSavingsButton = document.createElement('button');
+        hideSavingsButton.textContent = 'Hide Savings';
+        hideSavingsButton.addEventListener('click', function() {
+            // Update the display with the last 3 savings
+            updateSavingsList(savingsList.slice(-3));
+        });
+        showAllSavingsPlaceholder.appendChild(hideSavingsButton);
+    }
+
+    // Call the renderSavingsChart function with the savingsList data
+    renderSavingsChart(savingsList);
+});
+
+// Function to generate savings data for the chart
+function generateSavingsChartData(savingsList) {
+    // Initialize an object to store total savings for each month
+    const monthlySavings = {};
+
+    // Loop through savingsList to calculate total savings for each month
+    savingsList.forEach(function(savings) {
+        const date = new Date(savings.date);
+        const monthYear = `${date.getMonth() + 1}-${date.getFullYear()}`;
+        if (monthlySavings[monthYear]) {
+            monthlySavings[monthYear] += parseFloat(savings.amount);
+        } else {
+            monthlySavings[monthYear] = parseFloat(savings.amount);
+        }
+    });
+
+    // Convert monthlySavings object into arrays for Chart.js
+    const labels = Object.keys(monthlySavings);
+    const data = Object.values(monthlySavings);
+
+    return { labels, data };
+}
+
+// Function to render the savings chart
+function renderSavingsChart(savingsList) {
+    const chartData = generateSavingsChartData(savingsList);
+
+    // Get the canvas element
+    const ctx = document.getElementById('savingsChart').getContext('2d');
+
+    // Create the chart
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Total Savings per Month',
+                data: chartData.data,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+// Call updateSavingsList function when the page loads to display existing savings
+window.onload = updateSavingsList;
