@@ -72,10 +72,17 @@
         #showAllSavingsPlaceholder {
             margin-top: 20px;
         }
-        .container {
-          
-          
+       
+        .custom-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #dfbaba;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto; /* Enable vertical scrolling */
+            min-height: calc(100vh - 220px); /* Adjusted to accommodate footer height and some padding */
+            padding-bottom: 50px; /* Adjusted to accommodate footer height */
         }
     </style>
 </head>
@@ -107,7 +114,7 @@
         </div>
     </nav>
 
-    <div class="container" style="height: 600px;">
+    <div class="custom-container container">
         
         <h1>Savings</h1>
         <p>View your current savings and manage your finances efficiently.</p>
@@ -137,7 +144,7 @@
 
         <!-- Placeholder for the "Show All Savings" button -->
         <div id="showAllSavingsPlaceholder"></div>
-        <canvas id="savingsChart" width="1000" height="200"></canvas>
+        <canvas id="savingsChart" width="800" height="400"></canvas>
     </div>
 
     <!-- Footer -->
