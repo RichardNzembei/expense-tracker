@@ -4,122 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker - Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link Bootstrap CSS file -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="script.js"></script>
     <style>
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Additional CSS styles for the vertical layout */
-        .slide {
-            padding: 20px;
-            border-bottom: 1px solid #ccc;
-            background-color: #fff;
-            overflow: hidden;
-            max-height: 50px; /* Adjust this value to control the initial height */
-            transition: max-height 0.3s ease;
-        }
-
-        .slide:hover {
-            max-height: 200px; /* Adjust this value to control the expanded height */
-        }
-
-        .slide h2 {
-            color: #0981d1;
-            margin-bottom: 10px;
-        }
-
-        .slide p,
-        .slide ul {
-            color: #6b1057;
-        }
-
-        .slide ul {
-            list-style-type: none;
-            padding-left: 20px;
-        }
-
-        .slide ul li {
-            margin-bottom: 5px;
-        }
-
+        /* Additional custom styles can be kept here */
         .start-info {
-            
             text-align: center;
             padding: 30px;
             background-color: #588186;
-            
         }
-        h2{
+        h2 {
             color: rgb(131, 32, 118);
         }
-        p{
+        p {
             color: rgb(22, 24, 23);
         }
-        
-
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <button class="profileButton">Profile</button>
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="home.html">Home</a>
-                <a href="Expenses.html">Expense</a>
-                <a href="Targets.html">Targets</a>
-                <a href="Savings.html">Savings</a>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tracker</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Expenses.html">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Targets.html">Targets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Savings.html">Savings</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-success me-2">Profile</button>
             </div>
         </div>
-    </div>
-    <div class="start-info">To get started visit Home on Menu</Menu></div>
+    </nav>
+    <div class="start-info">To get started visit Home on Menu</div>
 
     <div class="container">
-        <div class="slide">
-            <h2>Why Track Your Expenses?</h2>
-            <p>Tracking your expenses allows you to:</p>
-            <ul>
-                <li>Understand where your money is going</li>
-                <li>Identify areas where you can save money</li>
-                <li>Plan and budget effectively</li>
-                <li>Achieve your financial goals</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Why Save Money?</h2>
-            <p>Saving money is important because it:</p>
-            <ul>
-                <li>Provides financial security</li>
-                <li>Allows you to achieve your long-term goals</li>
-                <li>Provides a safety net for unexpected expenses</li>
-                <li>Opens up opportunities for investments and wealth building</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Why Set Financial Targets?</h2>
-            <p>Setting financial targets helps you:</p>
-            <ul>
-                <li>Stay focused on your financial goals</li>
-                <li>Motivate yourself to save and invest</li>
-                <li>Track your progress and make adjustments as needed</li>
-                <li>Plan for major expenses like buying a house or retiring</li>
-            </ul>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Why Track Your Expenses?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Understand where your money is going</li>
+                            <li>Identify areas where you can save money</li>
+                            <li>Plan and budget effectively</li>
+                            <li>Achieve your financial goals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Why Save Money?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Provides financial security</li>
+                            <li>Allows you to achieve your long-term goals</li>
+                            <li>Provides a safety net for unexpected expenses</li>
+                            <li>Opens up opportunities for investments and wealth building</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Why Set Financial Targets?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Stay focused on your financial goals</li>
+                            <li>Motivate yourself to save and invest</li>
+                            <li>Track your progress and make adjustments as needed</li>
+                            <li>Plan for major expenses like buying a house or retiring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="video-container">
         <p>If you're interested in learning more about money and its relation to monetary, visit <a href="https://youtu.be/6nSwT_5GoJk?si=WbqGASiRTHl0-FdG" target="_blank">this site</a> to learn more.</p>
     </div>
-    <footer>
-        <p>&copy; 2024 Expense Tracker.@Reubeb Devs</p>
-        
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
+        </div>
     </footer>
-</body>
+
+    <!-- Link Bootstrap JavaScript file -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
 </html>

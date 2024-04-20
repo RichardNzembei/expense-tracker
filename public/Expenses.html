@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expenses</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Link to your custom CSS file -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Link to your JavaScript file -->
     <script src="script.js"></script>
 
     <style>
+         
         /* Additional CSS styles for the expense tab */
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            min-height: calc(100vh - 120px); /* Adjusted to accommodate footer height */
-        }
+       
 
         h1, h4 {
             color: #333;
@@ -65,49 +66,87 @@
         p{
             color: rgb(151, 41, 118);
         }
+   
+
+        /* Additional styles for footer */
+        footer {
+            margin-top: 50px; /* Adjusted margin */
+            text-align: center; /* Center align footer content */
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <button class="profileButton">Profile</button>
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-            <div class="dropdown-content">
-                <a href="home.html">Home</a>
-                <a href="Expenses.html">Expenses</a>
-                <a href="Targets.html">Targets</a>
-                <a href="Savings.html">Savings</a>
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Expenses</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Expenses.html">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Targets.html">Targets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Savings.html">Savings</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-success me-2">Profile</button>
             </div>
         </div>
-    </div>
-
+    </nav>
     <div class="container">
         <h1>Expenses</h1>
         <p>View and manage your expenses here.</p>
 
         <!-- Expense filter form -->
-        <form id="expenseFilterForm">
-            <label for="categoryFilter">Filter by Category:</label>
-            <select id="categoryFilter">
-                <option value="">All</option>
-                <option value="Food">Food</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Utilities">Utilities</option>
-                <!-- Add more categories as needed -->
-            </select>
-            <label for="dateFilter">Filter by Date:</label>
-            <input type="date" id="dateFilter">
-            <button type="submit">Apply Filters</button>
+        <form id="expenseFilterForm" class="row g-3">
+            <div class="col-md-4">
+                <label for="categoryFilter" class="form-label">Filter by Category:</label>
+                <select class="form-select" id="categoryFilter">
+                    <option value="">All</option>
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Utilities">Utilities</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="dateFilter" class="form-label">Filter by Date:</label>
+                <input type="date" class="form-control" id="dateFilter">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </div>
         </form>
 
         <!-- Display filtered expenses here -->
         <div id="spendings"></div>
 
-
         <!-- Canvas for graph -->
-        <canvas id="expenseChart" width="800" height="400"></canvas>
+        <canvas id="expenseChart" width="800" height="400" class="mt-5"></canvas>
     </div>
 
+    <!-- Footer -->
+    <footer class="text-muted">
+        <div class="container">
+            <p>&copy; 2024 Expense Tracker. @Reubeb Devs</p>
+        </div>
+    </footer>
+
+
+    <!-- Link Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Include your custom JavaScript -->
     <script>
         // Retrieve expenses data from local storage
         const storedExpenses = localStorage.getItem("expensesList");
@@ -152,23 +191,16 @@
         // Create the graph as a pie chart
         const ctx = document.getElementById('expenseChart').getContext('2d');
         const myChart = new Chart(ctx, {
-    type: 'pie',
-    data: chartData,
-    options: {
-        legend: {
-            display: true,
-            position: 'right', // Position legend on the right side
-            align: 'start', // Align legend to the start of the right side
-        }
-    }
-});
-
-
+            type: 'pie',
+            data: chartData,
+            options: {
+                legend: {
+                    display: true,
+                    position: 'right', // Position legend on the right side
+                    align: 'start', // Align legend to the start of the right side
+                }
+            }
+        });
     </script>
-   
-   <footer>
-    <p>&copy; 2024 Expense Tracker.@Reubeb Devs</p>
-    
-</footer>
 </body>
 </html>

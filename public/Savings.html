@@ -5,32 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savings</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Chart.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
+    <!-- Custom JavaScript -->
     <script src="script.js"></script>
 
-
-   
     <style>
         body {
-        
             background-color: hsl(173, 11%, 86%);
         }
-        .container {
-           
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #dfbaba;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Enable vertical scrolling */
-    height: calc(100vh - 220px); /* Adjusted to accommodate footer height and some padding */
-    padding-bottom: 50px; /* Adjusted to accommodate footer height */
-}
 
-
+       
 
         h1 {
             color: #240b7e;
@@ -40,13 +32,7 @@
             color: #0f4e1f;
         }
 
-        form {
-            margin-bottom: 20px;
-        }
-
         label {
-            display: block;
-            margin-bottom: 5px;
             color: #a8183c;
         }
 
@@ -86,26 +72,35 @@
         #showAllSavingsPlaceholder {
             margin-top: 20px;
         }
-      
-
-
-
-        
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <button class="profileButton"></button> Profile </button>
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-            <div class="dropdown-content">
-                <a href="home.html">Home</a>
-                <a href="Expenses.html">Expenses</a>
-                <a href="Targets.html">Targets</a>
-                <a href="Savings.html">Savings</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Savings</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Expenses.html">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Targets.html">Targets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Savings.html">Savings</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-success me-2">Profile</button>
             </div>
         </div>
-    </div>
+    </nav>
 
     <div class="container">
         <h1>Savings</h1>
@@ -113,19 +108,22 @@
 
         <!-- Savings form -->
         <form id="savingsForm">
-            <label for="savingsMethod">Savings Method:</label>
-            <select id="savingsMethod">
-                <option value="M-Shwari">M-Shwari</option>
-                <option value="Bank">Bank</option>
-            </select>
-            
-            <label for="savingsDate">Date:</label>
-            <input type="date" id="savingsDate" required>
-            
-            <label for="savingsAmount">Amount:</label>
-            <input type="number" id="savingsAmount" placeholder="Enter amount" required>
-            
-            <button type="submit">Add Savings</button>
+            <div class="mb-3">
+                <label for="savingsMethod" class="form-label">Savings Method:</label>
+                <select class="form-select" id="savingsMethod">
+                    <option value="M-Shwari">M-Shwari</option>
+                    <option value="Bank">Bank</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="savingsDate" class="form-label">Date:</label>
+                <input type="date" class="form-control" id="savingsDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="savingsAmount" class="form-label">Amount:</label>
+                <input type="number" class="form-control" id="savingsAmount" placeholder="Enter amount" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Savings</button>
         </form>
 
         <!-- Container for displaying recent savings -->
@@ -135,15 +133,13 @@
         <div id="showAllSavingsPlaceholder"></div>
         <canvas id="savingsChart" width="800" height="400"></canvas>
     </div>
-    
 
-
-
-    <footer>
-        <p>&copy; 2024 Expense Tracker.@Reubeb Devs</p>
-        
+    <!-- Footer -->
+    <footer class="text-muted text-center py-3">
+        <p>&copy; 2024 Expense Tracker. @Reubeb Devs</p>
     </footer>
 
-    
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

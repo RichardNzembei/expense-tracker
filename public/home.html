@@ -3,85 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title> <!-- Corrected typo: Removed the extra "l" -->
+    <title>Home</title>
 
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="script.js"></script>
-  
 
-
-    
     <style>
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow-y: auto; /* Enable vertical scrolling */
-            height: calc(100vh - 170px); /* Adjusted to accommodate footer height and some padding */
-            padding-bottom: 50px; /* Adjusted to accommodate footer height */
+        /* Custom CSS for image animation */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
+
+        .profile-image {
+            animation: slideInFromLeft 1s ease;
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+        .multiples {
+    color: blue; /* Change text color to blue */
+}
+
         h1, h4 {
-            color: #333;
+            color: #0d8873;
         }
         p {
             color: #666;
         }
+   
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="registration.html" class="profileButton">Profile</a>
-
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-            <div class="dropdown-content">
-                <a href="home.html">Home</a>
-                <a href="Expenses.html">Expenses</a>
-                <a href="Targets.html">Targets</a>
-                <a href="Savings.html">Savings</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Home</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Expenses.html">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Targets.html">Targets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Savings.html">Savings</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-success me-2">Profile</button>
             </div>
         </div>
-    </div>
-
+    </nav>
     <div class="container">
         <h4>Welcome to the seamless money <span class="multiples"></span></h4>
         <p>Hello friend, track records with me 😊</p>
         
-        <div class="multiple">
-            <img src="images/money1.png" alt="Profile Image 1" class="profile-image">
-            <img src="images/money2.jpg" alt="Profile Image 2" class="profile-image hidden">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="images/money1.png" alt="Profile Image 1" class="profile-image img-fluid">
+            </div>
+            <div class="col-md-6">
+                <img src="images/money2.jpg" alt="Profile Image 2" class="profile-image img-fluid d-none d-md-block">
+            </div>
         </div>
         <p id="motivation">Let's make your transactions easy and traceable!</p>
 
-        <input type="text" id="expenseInput" placeholder="Enter expense">
-        <input type="text" id="amountInput" placeholder="Enter amount">
-        <input type="date" id="dateInput" placeholder="choose date"><br>
+        <!-- Expense input form -->
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="expenseInput" class="form-control mb-2" placeholder="Enter expense">
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="amountInput" class="form-control mb-2" placeholder="Enter amount">
+            </div>
+            <div class="col-md-4">
+                <input type="date" id="dateInput" class="form-control mb-2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <select id="categoryInput" class="form-select mb-2">
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Utilities">Utilities</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+            <div class="col-md-6">
+                <button id="addExpenseBtn" class="btn btn-primary mb-2">Add Expense</button>
+            </div>
+        </div>
 
-        <select id="categoryInput">
-            <option value="Food">Food</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Utilities">Utilities</option>
-            <!-- Add more categories as needed -->
-        </select>
-        <button id="addExpenseBtn">Add Expense</button>
-
+        <!-- Recent expenses list -->
         <div id="expensesList">
             <h2>Recents</h2>
-            <ul id="recentExpenses"></ul>
+            <ul id="recentExpenses" class="list-group"></ul>
         </div>
     </div>
    
- 
-    <footer>
-        <p>&copy; 2024 Expense Tracker.@Reubeb Devs</p>
-        
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <p class="text-muted">&copy; 2024 Expense Tracker. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
